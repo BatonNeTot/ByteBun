@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class ByteBun {
 
-    private final static byte BYTE_MASK = -1;
+    private final static int BYTE_MASK = 0xff;
 
     private byte[] bytes;
 
@@ -142,7 +142,7 @@ public class ByteBun {
 
         checkReader(tmpIndex, tmpOffset);
 
-        final boolean value = ((bytes[readerIndex] >> (7 - readerBitOffset)) & 1) == 1;
+        final boolean value = (((bytes[readerIndex] & BYTE_MASK) >> (7 - readerBitOffset)) & 1) == 1;
 
         readerIndex = tmpIndex;
         readerBitOffset = tmpOffset;
@@ -162,7 +162,7 @@ public class ByteBun {
             final byte tailMask = (byte)(~headMask);
 
             bytes[writerIndex] &= tailMask;
-            bytes[writerIndex] |= value >> (writerBitOffset);
+            bytes[writerIndex] |= (value & BYTE_MASK) >> (writerBitOffset);
 
             bytes[tmpIndex] &= headMask;
             bytes[tmpIndex] |= value << (8 - writerBitOffset);
@@ -184,7 +184,7 @@ public class ByteBun {
             value = bytes[readerIndex];
         } else {
             value |= bytes[readerIndex] << (readerBitOffset);
-            value |= bytes[tmpIndex] >> (8 - readerBitOffset);
+            value |= (bytes[tmpIndex] & BYTE_MASK) >> (8 - readerBitOffset);
         }
 
         readerIndex = tmpIndex;
@@ -225,7 +225,7 @@ public class ByteBun {
         } else {
             value |= bytes[readerIndex++] << (8 + readerBitOffset);
             value |= bytes[readerIndex++] << (readerBitOffset);
-            value |= bytes[readerIndex] >> (8 - readerBitOffset);
+            value |= (bytes[readerIndex] & BYTE_MASK) >> (8 - readerBitOffset);
         }
 
         return value;
@@ -280,7 +280,7 @@ public class ByteBun {
             value |= bytes[readerIndex++] << (16 + readerBitOffset);
             value |= bytes[readerIndex++] << (8 + readerBitOffset);
             value |= bytes[readerIndex++] << (readerBitOffset);
-            value |= bytes[readerIndex] >> (8 - readerBitOffset);
+            value |= (bytes[readerIndex] & BYTE_MASK) >> (8 - readerBitOffset);
         }
 
         return value;
@@ -351,7 +351,7 @@ public class ByteBun {
             value |= bytes[readerIndex++] << (16 + readerBitOffset);
             value |= bytes[readerIndex++] << (8 + readerBitOffset);
             value |= bytes[readerIndex++] << (readerBitOffset);
-            value |= bytes[readerIndex] >> (8 - readerBitOffset);
+            value |= (bytes[readerIndex] & BYTE_MASK) >> (8 - readerBitOffset);
         }
 
         return value;
