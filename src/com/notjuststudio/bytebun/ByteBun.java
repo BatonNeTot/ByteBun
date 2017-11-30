@@ -199,7 +199,7 @@ public class ByteBun {
             bytes[writerIndex++] = (byte)(value >> 8);
             bytes[writerIndex++] = (byte)value;
         } else {
-            final byte headMask = (byte)((1 << (8 - writerIndex)) - 1);
+            final byte headMask = (byte)((1 << (8 - writerBitOffset)) - 1);
             final byte tailMask = (byte)(~headMask);
 
             bytes[writerIndex] &= tailMask;
@@ -248,7 +248,7 @@ public class ByteBun {
             bytes[writerIndex++] = (byte)(value >> 8);
             bytes[writerIndex++] = (byte)value;
         } else {
-            final byte headMask = (byte)((1 << (8 - writerIndex)) - 1);
+            final byte headMask = (byte)((1 << (8 - writerBitOffset)) - 1);
             final byte tailMask = (byte)(~headMask);
 
             bytes[writerIndex] &= tailMask;
@@ -307,7 +307,7 @@ public class ByteBun {
             bytes[writerIndex++] = (byte)(value >> 8);
             bytes[writerIndex++] = (byte)value;
         } else {
-            final byte headMask = (byte)((1 << (8 - writerIndex)) - 1);
+            final byte headMask = (byte)((1 << (8 - writerBitOffset)) - 1);
             final byte tailMask = (byte)(~headMask);
 
             bytes[writerIndex] &= tailMask;
