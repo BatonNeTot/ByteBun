@@ -392,7 +392,7 @@ public class ByteBun {
     public ByteBun readBooleans (@NotNull final boolean[] target, @NotNull final int pos, @NotNull final int length) {
         checkLength(length);
         checkArray(target, pos, length);
-        checkReader(readerIndex + (readerBitOffset + target.length) / 8, (byte)((readerBitOffset + target.length) % 8));
+        checkReader(readerIndex + (readerBitOffset + length) / 8, (byte)((readerBitOffset + length) % 8));
         for (int i = 0; i < length; i++) {
             target[i + pos] = readBoolean();
         }
@@ -406,7 +406,7 @@ public class ByteBun {
     public ByteBun writeBytes(@NotNull final byte[] value, @NotNull final int pos, @NotNull final int length) {
         checkLength(length);
         checkArray(value, pos, length);
-        checkWriter(writerIndex + value.length, writerBitOffset);
+        checkWriter(writerIndex + length, writerBitOffset);
         for (int i = 0; i < length; i++ ) {
             writeByte(value[pos + i]);
         }
@@ -441,7 +441,7 @@ public class ByteBun {
     public ByteBun readBytes(@NotNull final byte[] target, @NotNull final int pos, @NotNull final int length) {
         checkLength(length);
         checkArray(target, pos, length);
-        checkReader(readerIndex + target.length, readerBitOffset);
+        checkReader(readerIndex + length, readerBitOffset);
         for (int i = 0; i < length; i++) {
             target[i + pos] = readByte();
         }
@@ -504,7 +504,7 @@ public class ByteBun {
     public ByteBun readShorts(@NotNull final short[] target, @NotNull final int pos, @NotNull final int length) {
         checkLength(length);
         checkArray(target, pos, length);
-        checkReader(readerIndex + target.length * 2, readerBitOffset);
+        checkReader(readerIndex + length * 2, readerBitOffset);
         for (int i = 0; i < length; i++) {
             target[i + pos] = readShort();
         }
@@ -567,7 +567,7 @@ public class ByteBun {
     public ByteBun readChars(@NotNull final char[] target, @NotNull final int pos, @NotNull final int length) {
         checkLength(length);
         checkArray(target, pos, length);
-        checkReader(readerIndex + target.length * 2, readerBitOffset);
+        checkReader(readerIndex + length * 2, readerBitOffset);
         for (int i = 0; i < length; i++) {
             target[i + pos] = readChar();
         }
@@ -630,8 +630,8 @@ public class ByteBun {
     public ByteBun readInts(@NotNull final int[] target, @NotNull final int pos, @NotNull final int length) {
         checkLength(length);
         checkArray(target, pos, length);
-        checkReader(readerIndex + target.length * 4, readerBitOffset);
-        for (int i = 0; i < target.length; i++) {
+        checkReader(readerIndex + length * 4, readerBitOffset);
+        for (int i = 0; i < length; i++) {
             target[i] = readInt();
         }
         return this;
@@ -693,8 +693,8 @@ public class ByteBun {
     public ByteBun readFloats(@NotNull final float[] target, @NotNull final int pos, @NotNull final int length) {
         checkLength(length);
         checkArray(target, pos, length);
-        checkReader(readerIndex + target.length * 4, readerBitOffset);
-        for (int i = 0; i < target.length; i++) {
+        checkReader(readerIndex + length * 4, readerBitOffset);
+        for (int i = 0; i < length; i++) {
             target[i] = readFloat();
         }
         return this;
@@ -756,8 +756,8 @@ public class ByteBun {
     public ByteBun readLongs(@NotNull final long[] target, @NotNull final int pos, @NotNull final int length) {
         checkLength(length);
         checkArray(target, pos, length);
-        checkReader(readerIndex + target.length * 8, readerBitOffset);
-        for (int i = 0; i < target.length; i++) {
+        checkReader(readerIndex + length * 8, readerBitOffset);
+        for (int i = 0; i < length; i++) {
             target[i] = readLong();
         }
         return this;
@@ -819,8 +819,8 @@ public class ByteBun {
     public ByteBun readDoubles(@NotNull final double[] target, @NotNull final int pos, @NotNull final int length) {
         checkLength(length);
         checkArray(target, pos, length);
-        checkReader(readerIndex + target.length * 8, readerBitOffset);
-        for (int i = 0; i < target.length; i++) {
+        checkReader(readerIndex + length * 8, readerBitOffset);
+        for (int i = 0; i < length; i++) {
             target[i] = readDouble();
         }
         return this;
